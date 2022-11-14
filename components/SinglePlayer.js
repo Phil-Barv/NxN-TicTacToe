@@ -58,7 +58,7 @@ const SinglePlayer = ({curr, sound, starts, mode}) => {
         if (board !== null || board !== undefined) {
             setArrLen(Math.sqrt(Object?.keys(board || [0,0]).length))
         }
-    }, [board, mode])
+    }, [board])
 
     useEffect(()=> {
         var temp = "1fr";
@@ -183,7 +183,7 @@ const SinglePlayer = ({curr, sound, starts, mode}) => {
         }
 
         if (currentPlayer % 2 == 1 && currentPlayer <= arrLen*arrLen && winner != true){
-            await sleep(650)
+            await sleep(10)
             await handlePlayTurnAI();
         }
     }
