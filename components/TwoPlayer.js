@@ -195,7 +195,7 @@ const TwoPlayer = ({curr, sound, starts, mode}) => {
         }
 
         if (currentPlayer % 2 == 1 && currentPlayer <= arrLen*arrLen && winner != true){
-            await sleep(10)
+            await sleep(150)
             await handlePlayTurnHuman2(key, value);
         }
     }

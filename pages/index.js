@@ -7,9 +7,18 @@ import {Switch} from 'antd';
 import {UserOutlined, UsergroupAddOutlined, DownloadOutlined, LoginOutlined} from '@ant-design/icons';
 import SinglePlayer from '../components/SinglePlayer';
 import TwoPlayer from '../components/TwoPlayer';
-// require('dotenv').config();
+require('dotenv').config();
 
 export default function Home() {
+
+  const [api, setAPI] = useState("");
+
+  useEffect(() => {
+      if (typeof process.env.NEXT_PUBLIC_API !== "undefined") {
+          setAPI(process.env.NEXT_PUBLIC_API);
+      }
+  })
+  
 
   const [board, setBoard] = useState({});
   const [currentView, setCurrentView] = useState(0);
@@ -69,7 +78,7 @@ export default function Home() {
   }
 
   const apiCall = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/get-board`, 
+    const res = await fetch(`${api}/get-board`, 
     {
       method: "POST",
       headers: {
