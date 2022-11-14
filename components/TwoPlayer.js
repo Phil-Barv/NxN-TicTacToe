@@ -8,8 +8,17 @@ import draw from '../public/resources/draw.mp3';
 import shame from '../public/resources/draw.mp3';
 
 import {useRouter} from 'next/router'
+require('dotenv').config();
 
 const TwoPlayer = ({curr, sound, starts, mode}) => {
+
+    const [api, setAPI] = useState("");
+
+    useEffect(() => {
+        if (typeof process.env.NEXT_PUBLIC_API !== "undefined") {
+            setAPI(process.env.NEXT_PUBLIC_API);
+        }
+    })
 
     const [board, setBoard] = useState({});
     const [arrLen, setArrLen] = useState(0);
@@ -46,7 +55,7 @@ const TwoPlayer = ({curr, sound, starts, mode}) => {
 
     useEffect(() => {
         if (board !== null || board !== undefined) {
-            setArrLen(Math.sqrt(Object?.keys(board || {}).length))
+            setArrLen(Math.sqrt(Object?.keys(board || {"test":"test"}).length))
         }
     }, [board])
 
@@ -90,6 +99,8 @@ const TwoPlayer = ({curr, sound, starts, mode}) => {
     //     }
     // }
 
+    // console.log("ENV VARS", api)
+
     const handlePlayTurnHuman = async (key, value) => {
         try {   
 
@@ -108,7 +119,7 @@ const TwoPlayer = ({curr, sound, starts, mode}) => {
 
                 // console.log("kdjvvknnf", key, temp)
 
-                const res = await fetch(`${process.env.API}/human-play`, 
+                const res = await fetch(`${api}/human-play`, 
                 {
                 method: "POST",
                 headers: {
@@ -150,7 +161,7 @@ const TwoPlayer = ({curr, sound, starts, mode}) => {
 
                 // console.log("kdjvvknnf", key, temp)
 
-                const res2 = await fetch(`${process.env.API}/human-play`, 
+                const res2 = await fetch(`${api}/human-play`, 
                 {
                 method: "POST",
                 headers: {

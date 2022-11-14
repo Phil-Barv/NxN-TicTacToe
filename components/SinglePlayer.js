@@ -7,9 +7,19 @@ import clipper from '../public/resources/clipper.mp3';
 import draw from '../public/resources/draw.mp3';
 import shame from '../public/resources/draw.mp3';
 
+
 import {useRouter} from 'next/router'
+require('dotenv').config();
 
 const SinglePlayer = ({curr, sound, starts, mode}) => {
+
+    const [api, setAPI] = useState("");
+
+    useEffect(() => {
+        if (typeof process.env.NEXT_PUBLIC_API !== "undefined") {
+            setAPI(process.env.NEXT_PUBLIC_API);
+        }
+    })
 
     const [board, setBoard] = useState({});
     const [arrLen, setArrLen] = useState(0);
@@ -46,9 +56,9 @@ const SinglePlayer = ({curr, sound, starts, mode}) => {
 
     useEffect(() => {
         if (board !== null || board !== undefined) {
-            setArrLen(Math.sqrt(Object?.keys(board || {}).length))
+            setArrLen(Math.sqrt(Object?.keys(board || [0,0]).length))
         }
-    }, [board])
+    }, [board, mode])
 
     useEffect(()=> {
         var temp = "1fr";
@@ -108,7 +118,7 @@ const SinglePlayer = ({curr, sound, starts, mode}) => {
 
                 // console.log("kdjvvknnf", key, temp)
 
-                const res = await fetch(`${process.env.API}/human-play`, 
+                const res = await fetch(`${api}/human-play`, 
                 {
                 method: "POST",
                 headers: {
@@ -140,7 +150,7 @@ const SinglePlayer = ({curr, sound, starts, mode}) => {
                 var ai_value = "X";
             }
 
-            const res = await fetch(`${process.env.API}/ai-play`, 
+            const res = await fetch(`${api}/ai-play`, 
             {
             method: "POST",
             headers: {
@@ -173,7 +183,7 @@ const SinglePlayer = ({curr, sound, starts, mode}) => {
         }
 
         if (currentPlayer % 2 == 1 && currentPlayer <= arrLen*arrLen && winner != true){
-            await sleep(0)
+            await sleep(650)
             await handlePlayTurnAI();
         }
     }
@@ -238,7 +248,7 @@ const SinglePlayer = ({curr, sound, starts, mode}) => {
                         <audio id="buzz">
                             <source src={buzz} type="audio/mpeg"></source>
                         </audio>
-                        {JSON.stringify(winner)}
+                        {/* {JSON.stringify(winner)} */}
                         {/* {JSON.stringify(board['curr'], null, 4)} */}
                     </div>
                 </>

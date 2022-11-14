@@ -7,6 +7,7 @@ import {Switch} from 'antd';
 import {UserOutlined, UsergroupAddOutlined, DownloadOutlined, LoginOutlined} from '@ant-design/icons';
 import SinglePlayer from '../components/SinglePlayer';
 import TwoPlayer from '../components/TwoPlayer';
+// require('dotenv').config();
 
 export default function Home() {
 
@@ -68,7 +69,7 @@ export default function Home() {
   }
 
   const apiCall = async () => {
-    const res = await fetch(`${process.env.API}/get-board`, 
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/get-board`, 
     {
       method: "POST",
       headers: {

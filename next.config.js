@@ -3,10 +3,10 @@ const nextConfig = {
   reactStrictMode: true,
 }
 
-
 module.exports = {
   webpack(config, options) {
     const { isServer } = options;
+    config.resolve.fallback = {fs : false}
     config.module.rules.push({
       test: /\.(ogg|mp3|wav|mpe?g)$/i,
       exclude: config.exclude,
