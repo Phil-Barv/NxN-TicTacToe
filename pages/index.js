@@ -17,7 +17,7 @@ export default function Home() {
       if (typeof process.env.NEXT_PUBLIC_API !== "undefined") {
           setAPI(process.env.NEXT_PUBLIC_API);
       }
-  })
+  }, [api])
   
 
   const [board, setBoard] = useState({});

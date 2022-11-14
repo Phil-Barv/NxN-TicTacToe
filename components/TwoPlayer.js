@@ -18,7 +18,7 @@ const TwoPlayer = ({curr, sound, starts, mode}) => {
         if (typeof process.env.NEXT_PUBLIC_API !== "undefined") {
             setAPI(process.env.NEXT_PUBLIC_API);
         }
-    })
+    }, [api])
 
     const [board, setBoard] = useState({});
     const [arrLen, setArrLen] = useState(0);
