@@ -108,7 +108,7 @@ const TwoPlayer = ({curr, sound, starts, mode}) => {
 
                 // console.log("kdjvvknnf", key, temp)
 
-                const res = await fetch(`http://127.0.0.1:5000/human-play`, 
+                const res = await fetch(`${process.env.API}/human-play`, 
                 {
                 method: "POST",
                 headers: {
@@ -150,7 +150,7 @@ const TwoPlayer = ({curr, sound, starts, mode}) => {
 
                 // console.log("kdjvvknnf", key, temp)
 
-                const res2 = await fetch(`http://127.0.0.1:5000/human-play`, 
+                const res2 = await fetch(`${process.env.API}/human-play`, 
                 {
                 method: "POST",
                 headers: {

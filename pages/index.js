@@ -68,7 +68,7 @@ export default function Home() {
   }
 
   const apiCall = async () => {
-    const res = await fetch(`http://127.0.0.1:5000/get-board`, 
+    const res = await fetch(`${process.env.API}/get-board`, 
     {
       method: "POST",
       headers: {
