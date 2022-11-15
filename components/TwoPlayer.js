@@ -60,13 +60,13 @@ const TwoPlayer = ({curr, sound, starts, mode}) => {
     }, [board])
 
     useEffect(()=> {
-        var temp = "1fr";
+        var tempGrid = "1fr";
 
         for (let i = 1; i < arrLen; i++){
-            temp += " 1fr"
+            tempGrid += " 1fr"
         }
 
-        setGrid(temp)
+        setGrid(tempGrid)
 
     }, [arrLen])
 
@@ -115,7 +115,7 @@ const TwoPlayer = ({curr, sound, starts, mode}) => {
                     var human_value = "O";
                 }
 
-                const temp = {"pos":[`${parseInt(key[1])}`,`${parseInt(key[3])}`],"value": human_value}
+                const temp = {"state": board, "pos":[`${parseInt(key[1])}`,`${parseInt(key[3])}`],"value": human_value}
 
                 // console.log("kdjvvknnf", key, temp)
 
@@ -157,7 +157,7 @@ const TwoPlayer = ({curr, sound, starts, mode}) => {
                     var human_value2 = "X";
                 }
 
-                const temp2 = {"pos":[`${parseInt(key[1])}`,`${parseInt(key[3])}`],"value": human_value2}
+                const temp2 = {"state": board, "pos":[`${parseInt(key[1])}`,`${parseInt(key[3])}`],"value": human_value2}
 
                 // console.log("kdjvvknnf", key, temp)
 

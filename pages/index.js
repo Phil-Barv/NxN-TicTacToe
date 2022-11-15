@@ -78,20 +78,24 @@ export default function Home() {
   }
 
   const apiCall = async () => {
-    const res = await fetch(`${api}/get-board`, 
-    {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({"size": size}),
-      datatpe: "json"
-    })
-
-    const response = await res.json()
-    console.log("KNVKNV", response['state'])
-    setBoard(response['state'])
+    try{
+      const res = await fetch(`${api}/get-board`, 
+      {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({"size": size}),
+        datatpe: "json"
+      })
+  
+      const response = await res.json()
+      // console.log("KNVKNV", response['state'])
+      setBoard(response['state'])
+    }catch (err) {
+      console.log("ERR", err)
+    }
   }
     const handleChangeView = (val) => {
       setCurrentView(val);
