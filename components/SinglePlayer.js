@@ -130,7 +130,7 @@ const SinglePlayer = ({curr, sound, starts, mode}) => {
                 })
             
                 const response = await res.json()
-                setBoard(response['play_state'])
+                setBoard(response['state'])
                 setWinner(response['win'])
                 setCurrentPlayer(currentPlayer + 1)
                 handlePlayCellSound();
@@ -162,7 +162,7 @@ const SinglePlayer = ({curr, sound, starts, mode}) => {
             })
         
             const response = await res.json()
-            setBoard(response['play_state'])
+            setBoard(response['state'])
             setWinner(response['win'])
             setCurrentPlayer(currentPlayer + 1)
             handlePlayCellSound();

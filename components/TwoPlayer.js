@@ -131,7 +131,7 @@ const TwoPlayer = ({curr, sound, starts, mode}) => {
                 })
             
                 const response = await res.json()
-                setBoard(response['play_state'])
+                setBoard(response['state'])
                 setWinner(response['win'])
                 setCurrentPlayer(currentPlayer + 1)
                 handlePlayCellSound();
@@ -173,7 +173,7 @@ const TwoPlayer = ({curr, sound, starts, mode}) => {
                 })
             
                 const response2 = await res2.json()
-                setBoard(response2['play_state'])
+                setBoard(response2['state'])
                 setWinner(response2['win'])
                 setCurrentPlayer(currentPlayer + 1)
                 handlePlayCellSound();
@@ -249,7 +249,7 @@ const TwoPlayer = ({curr, sound, starts, mode}) => {
                             gridTemplateColumns: grid,
                             gridTemplateRows: grid,
                             // width: getWidth(),
-                            gridGap: "3px",
+                            gridGap: `${arrLen}px`,
                             margin:"auto",
                         }}
                     >
