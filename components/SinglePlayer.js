@@ -261,7 +261,7 @@ const SinglePlayer = ({curr, sound, starts, mode, aiMode}) => {
                         <audio id="draw" autoPlay>
                             <source src={draw} type="audio/mpeg"></source>
                         </audio>
-                        <div style={{margin:"auto", width:"300px", height:"70%", boxShadow:"1px 1px 10px lightgray", textAlign:"center", background:"white"}}>
+                        <div style={{background:`${modeVar['modal']}`, margin:"auto", width:"300px", height:"70%", boxShadow:"1px 1px 10px lightgray", textAlign:"center"}}>
                             <div style={{height:"15%"}}></div>
                             <h1 style={{textShadow:`${modeVar['mdl-t-s']}`, color:`${modeVar['mdl-t']}`, fontSize:"40px"}}>{"It's a draw!"}</h1>
                             <br/>
@@ -287,7 +287,7 @@ const SinglePlayer = ({curr, sound, starts, mode, aiMode}) => {
                             </>
                         )}
 
-                        <div style={{margin:"auto", width:"300px", height:"70%", boxShadow:"1px 1px 10px lightgray", textAlign:"center", background:`${modeVar['modal']}`}}>
+                        <div style={{background:`${modeVar['modal']}`, margin:"auto", width:"300px", height:"70%", boxShadow:"1px 1px 10px lightgray", textAlign:"center"}}>
                             <div style={{height:"15%"}}></div>
                             <h1 style={{textShadow:`${mode['mdl-t-s']}`, color:`${mode['mdl-t']}`, fontSize:"40px"}}>Player {handleGetWinner()} Wins!</h1>
                             <br/>
@@ -298,7 +298,7 @@ const SinglePlayer = ({curr, sound, starts, mode, aiMode}) => {
                     </>
                 )
         }
-        {JSON.stringify(board, null, 4)}{aiVar}
+        {/* {JSON.stringify(board, null, 4)}{aiVar} */}
     </>
     )
 } 
