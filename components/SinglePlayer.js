@@ -11,7 +11,7 @@ import shame from '../public/resources/draw.mp3';
 import {useRouter} from 'next/router'
 require('dotenv').config();
 
-const SinglePlayer = ({curr, sound, starts, mode}) => {
+const SinglePlayer = ({curr, sound, starts, mode, aiMode}) => {
 
     const [api, setAPI] = useState("");
 
@@ -24,6 +24,7 @@ const SinglePlayer = ({curr, sound, starts, mode}) => {
     const [board, setBoard] = useState({});
     const [arrLen, setArrLen] = useState(0);
     const [modeVar, setModeVar] = useState({});
+    const [aiVar, setAiVar] = useState("");
     const [playSounds, setPlaySounds] = useState(false);
     const [playerStarts, setPlayerStarts] = useState(0);
     const [currentPlayer, setCurrentPlayer] = useState(-99);
@@ -40,7 +41,8 @@ const SinglePlayer = ({curr, sound, starts, mode}) => {
         setPlaySounds(sound);
         setPlayerStarts(starts);
         setModeVar(mode);
-    }, [curr, sound, starts, mode])
+        setAiVar(aiMode)
+    }, [curr, sound, starts, mode, aiMode])
 
     useEffect(() => {
         if(playerStarts == 1) {
@@ -58,7 +60,7 @@ const SinglePlayer = ({curr, sound, starts, mode}) => {
         if (board !== null || board !== undefined) {
             setArrLen(Math.sqrt(Object?.keys(board || [0,0]).length))
         }
-        console.log("Board", board)
+        console.log("Board", board, currentPlayer, winner)
     }, [board])
 
     useEffect(()=> {
@@ -158,7 +160,7 @@ const SinglePlayer = ({curr, sound, starts, mode}) => {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            body: JSON.stringify({"state": board, "value": ai_value}),
+            body: JSON.stringify({"state": board, "value": ai_value, "strategy": aiVar}),
             datatpe: "json"
             })
         
@@ -206,7 +208,7 @@ const SinglePlayer = ({curr, sound, starts, mode}) => {
         </div>
     ))
 
-    const handleRematch = () => {
+    const handleRestart = () => {
         router.reload();
     }
 
@@ -263,7 +265,7 @@ const SinglePlayer = ({curr, sound, starts, mode}) => {
                             <div style={{height:"15%"}}></div>
                             <h1 style={{textShadow:`${modeVar['mdl-t-s']}`, color:`${modeVar['mdl-t']}`, fontSize:"40px"}}>{"It's a draw!"}</h1>
                             <br/>
-                            <button style={{background:`${modeVar['btn-bg']}`, fontWeight:`${modeVar['btn-f-w']}`, border:`${modeVar['btn-b']}`, borderRadius:`${modeVar['btn-b-r']}`, color:`${modeVar['btn-t']}`, textShadow:`${modeVar['btn-t-s']}`, fontFamily:"Roboto", fontSize:"16px", padding:"7px", width:"55%", cursor:"pointer"}} onClick={handleRematch}>Rematch</button>
+                            <button style={{background:`${modeVar['btn-bg']}`, fontWeight:`${modeVar['btn-f-w']}`, border:`${modeVar['btn-b']}`, borderRadius:`${modeVar['btn-b-r']}`, color:`${modeVar['btn-t']}`, textShadow:`${modeVar['btn-t-s']}`, fontFamily:"Roboto", fontSize:"16px", padding:"7px", width:"55%", cursor:"pointer"}} onClick={handleRestart}>Restart</button>
                             <br/><br/>
                             <button style={{background:`${modeVar['btn-bg']}`, fontWeight:`${modeVar['btn-f-w']}`, border:`${modeVar['btn-b']}`, borderRadius:`${modeVar['btn-b-r']}`, color:`${modeVar['btn-t']}`, textShadow:`${modeVar['btn-t-s']}`, fontFamily:"Roboto", fontSize:"16px", padding:"7px", width:"55%", cursor:"pointer"}} onClick={handleQuitGame}>Quit</button>
                         </div>
@@ -289,13 +291,14 @@ const SinglePlayer = ({curr, sound, starts, mode}) => {
                             <div style={{height:"15%"}}></div>
                             <h1 style={{textShadow:`${mode['mdl-t-s']}`, color:`${mode['mdl-t']}`, fontSize:"40px"}}>Player {handleGetWinner()} Wins!</h1>
                             <br/>
-                            <button style={{background:`${modeVar['btn-bg']}`, fontWeight:`${modeVar['btn-f-w']}`, border:`${modeVar['btn-b']}`, borderRadius:`${modeVar['btn-b-r']}`, color:`${modeVar['btn-t']}`, textShadow:`${modeVar['btn-t-s']}`, fontFamily:"Roboto", fontSize:"16px", padding:"7px", width:"55%", cursor:"pointer"}} onClick={handleRematch}>Rematch</button>
+                            <button style={{background:`${modeVar['btn-bg']}`, fontWeight:`${modeVar['btn-f-w']}`, border:`${modeVar['btn-b']}`, borderRadius:`${modeVar['btn-b-r']}`, color:`${modeVar['btn-t']}`, textShadow:`${modeVar['btn-t-s']}`, fontFamily:"Roboto", fontSize:"16px", padding:"7px", width:"55%", cursor:"pointer"}} onClick={handleRestart}>Restart</button>
                             <br/><br/>
                             <button style={{background:`${modeVar['btn-bg']}`, fontWeight:`${modeVar['btn-f-w']}`, border:`${modeVar['btn-b']}`, borderRadius:`${modeVar['btn-b-r']}`, color:`${modeVar['btn-t']}`, textShadow:`${modeVar['btn-t-s']}`, fontFamily:"Roboto", fontSize:"16px", padding:"7px", width:"55%", cursor:"pointer"}} onClick={handleQuitGame}>Quit</button>
                         </div>
                     </>
                 )
         }
+        {JSON.stringify(board, null, 4)}{aiVar}
     </>
     )
 } 

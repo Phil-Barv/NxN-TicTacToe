@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
 import mellow from '../public/resources/mellow.mp3';
 import {Switch} from 'antd';
-import {UserOutlined, UsergroupAddOutlined, DownloadOutlined, LoginOutlined} from '@ant-design/icons';
+import {UserOutlined, UsergroupAddOutlined, DownloadOutlined, LoginOutlined, BulbOutlined, BugOutlined, VerticalAlignMiddleOutlined} from '@ant-design/icons';
 import SinglePlayer from '../components/SinglePlayer';
 import TwoPlayer from '../components/TwoPlayer';
 require('dotenv').config();
@@ -29,6 +29,7 @@ export default function Home() {
   const [light, setLight] = useState(true);
   const [mode, setMode] = useState({});
   const [size, setSize] = useState(0);
+  const [aiMode, setAiMode] = useState("");
 
   const colorConfigs = [
     {"light":
@@ -144,6 +145,11 @@ export default function Home() {
     setPlayerStarts(val);
   }
 
+  const handleChangeAI = (view, mode) => {
+    handleChangeView(view)
+    setAiMode(mode);
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -174,7 +180,7 @@ export default function Home() {
               <br/>
               <button style={{background:`${mode['btn-bg']}`, fontWeight:`${mode['btn-f-w']}`, border:`${mode['btn-b']}`, borderRadius:`${mode['btn-b-r']}`, color:`${mode['btn-t']}`, textShadow:`${mode['btn-t-s']}`,  fontFamily:"Roboto", fontSize:"15px", padding:"7px", width:"50%", cursor:"pointer"}} onClick={()=> {handleChangeView(1)}}>Single Player <span style={{float:"right", marginRight:"3px", fontSize:"1.1em"}}><UserOutlined/></span></button>
               <br/><br/>
-              <button style={{background:`${mode['btn-bg']}`, fontWeight:`${mode['btn-f-w']}`, border:`${mode['btn-b']}`, borderRadius:`${mode['btn-b-r']}`, color:`${mode['btn-t']}`, textShadow:`${mode['btn-t-s']}`, fontFamily:"Roboto", fontSize:"15px", padding:"7px", width:"50%", cursor:"pointer"}} onClick={()=> {handleChangeView(4)}}>Two Player <span style={{float:"right", marginRight:"3px", fontSize:"1.2em"}}><UsergroupAddOutlined/></span></button>
+              <button style={{background:`${mode['btn-bg']}`, fontWeight:`${mode['btn-f-w']}`, border:`${mode['btn-b']}`, borderRadius:`${mode['btn-b-r']}`, color:`${mode['btn-t']}`, textShadow:`${mode['btn-t-s']}`, fontFamily:"Roboto", fontSize:"15px", padding:"7px", width:"50%", cursor:"pointer"}} onClick={()=> {handleChangeView(5)}}>Two Player <span style={{float:"right", marginRight:"3px", fontSize:"1.2em"}}><UsergroupAddOutlined/></span></button>
             </div>
             <div style={{height:"10%"}}></div>
           </>
@@ -204,52 +210,65 @@ export default function Home() {
             <div style={{height:"15%"}}></div>
             <h1 style={{textShadow:`${mode['mdl-t-s']}`, color:`${mode['mdl-t']}`, fontSize:"40px", marginLeft:"25px"}}>Tic Tac Toe</h1>
             <br/>
-            <button style={{background:`${mode['btn-bg']}`, fontWeight:`${mode['btn-f-w']}`, border:`${mode['btn-b']}`, borderRadius:`${mode['btn-b-r']}`, color:`${mode['btn-t']}`, textShadow:`${mode['btn-t-s']}`, fontFamily:"Roboto", fontSize:"16px", padding:"5px", width:"55%", cursor:"pointer"}} onClick={()=> {handlePlayerStarts(3, 1)}}>Play 1 Starts <span style={{float:"right", marginRight:"3px", fontSize:"1.3em", rotate:"270deg"}}><DownloadOutlined/></span></button>
+            <button style={{background:`${mode['btn-bg']}`, fontWeight:`${mode['btn-f-w']}`, border:`${mode['btn-b']}`, borderRadius:`${mode['btn-b-r']}`, color:`${mode['btn-t']}`, textShadow:`${mode['btn-t-s']}`, fontFamily:"Roboto", fontSize:"16px", padding:"5px", width:"55%", cursor:"pointer"}} onClick={()=> {handleChangeAI(3, "Easy")}}>Easy <span style={{float:"right", marginRight:"3px", fontSize:"1.3em"}}><BulbOutlined/></span></button>
             <br/><br/>
-            <button style={{background:`${mode['btn-bg']}`, fontWeight:`${mode['btn-f-w']}`, border:`${mode['btn-b']}`, borderRadius:`${mode['btn-b-r']}`, color:`${mode['btn-t']}`, textShadow:`${mode['btn-t-s']}`, fontFamily:"Roboto", fontSize:"16px", padding:"5px", width:"55%", cursor:"pointer"}} onClick={()=> {handlePlayerStarts(3, 2)}}>Player 2 Starts <span style={{float:"right", marginRight:"3px", fontSize:"1.2em"}}><LoginOutlined/></span></button>
+            <button style={{background:`${mode['btn-bg']}`, fontWeight:`${mode['btn-f-w']}`, border:`${mode['btn-b']}`, borderRadius:`${mode['btn-b-r']}`, color:`${mode['btn-t']}`, textShadow:`${mode['btn-t-s']}`, fontFamily:"Roboto", fontSize:"16px", padding:"5px", width:"55%", cursor:"pointer"}} onClick={()=> {handleChangeAI(3, "Medium")}}>Medium <span style={{float:"right", marginRight:"3px", fontSize:"1.3em"}}><VerticalAlignMiddleOutlined /></span></button>
+            <br/><br/>
+            <button style={{background:`${mode['btn-bg']}`, fontWeight:`${mode['btn-f-w']}`, border:`${mode['btn-b']}`, borderRadius:`${mode['btn-b-r']}`, color:`${mode['btn-t']}`, textShadow:`${mode['btn-t-s']}`, fontFamily:"Roboto", fontSize:"16px", padding:"5px", width:"55%", cursor:"pointer"}} onClick={()=> {handleChangeAI(3, "Hard")}}>Hard <span style={{float:"right", marginRight:"3px", fontSize:"1.2em"}}><BugOutlined/></span></button>
           </div>
         </>
         )}
-
         {currentView == 3 && (
           <>
-            <SinglePlayer curr={board} sound={playSound} starts={playerStarts} mode={mode}/>
-          </>
+          <div style={{margin:"auto", width:"300px", height:"70%", boxShadow:"1px 1px 10px lightgray", textAlign:"center", background:`${mode['modal']}`}}>
+            <div style={{height:"15%"}}></div>
+            <h1 style={{textShadow:`${mode['mdl-t-s']}`, color:`${mode['mdl-t']}`, fontSize:"40px", marginLeft:"25px"}}>Tic Tac Toe</h1>
+            <br/>
+            <button style={{background:`${mode['btn-bg']}`, fontWeight:`${mode['btn-f-w']}`, border:`${mode['btn-b']}`, borderRadius:`${mode['btn-b-r']}`, color:`${mode['btn-t']}`, textShadow:`${mode['btn-t-s']}`, fontFamily:"Roboto", fontSize:"16px", padding:"5px", width:"55%", cursor:"pointer"}} onClick={()=> {handlePlayerStarts(4, 1)}}>Play 1 Starts <span style={{float:"right", marginRight:"3px", fontSize:"1.3em", rotate:"270deg"}}><DownloadOutlined/></span></button>
+            <br/><br/>
+            <button style={{background:`${mode['btn-bg']}`, fontWeight:`${mode['btn-f-w']}`, border:`${mode['btn-b']}`, borderRadius:`${mode['btn-b-r']}`, color:`${mode['btn-t']}`, textShadow:`${mode['btn-t-s']}`, fontFamily:"Roboto", fontSize:"16px", padding:"5px", width:"55%", cursor:"pointer"}} onClick={()=> {handlePlayerStarts(4, 2)}}>Player 2 Starts <span style={{float:"right", marginRight:"3px", fontSize:"1.2em"}}><LoginOutlined/></span></button>
+          </div>
+        </>
         )}
-
         {currentView == 4 && (
           <>
-            <div style={{margin:"auto", width:"300px", height:"70%", boxShadow:"1px 1px 10px lightgray", textAlign:"center", background:`${mode['modal']}`}}>
-              <div style={{height:"5%"}}></div>
-              <h1 style={{textShadow:`${mode['mdl-t-s']}`, color:`${mode['mdl-t']}`, fontSize:"40px", marginLeft:"25px"}}>Tic Tac Toe</h1>
-          
-              <button style={{background:`${mode['btn-bg']}`, fontWeight:`${mode['btn-f-w']}`, border:`${mode['btn-b']}`, borderRadius:`${mode['btn-b-r']}`, color:`${mode['btn-t']}`, textShadow:`${mode['btn-t-s']}`, fontFamily:"Roboto", fontSize:"18px", width:"50%", cursor:"pointer"}} onClick={()=> {handleChangeSize(5, 3)}}>3 x 3</button>
-              <br/><br/>
-              <button style={{background:`${mode['btn-bg']}`, fontWeight:`${mode['btn-f-w']}`, border:`${mode['btn-b']}`, borderRadius:`${mode['btn-b-r']}`, color:`${mode['btn-t']}`, textShadow:`${mode['btn-t-s']}`,  fontFamily:"Roboto", fontSize:"18px", width:"50%", cursor:"pointer"}} onClick={()=> {handleChangeSize(5, 4)}}>4 x 4</button>
-              <br/><br/>
-              <button style={{background:`${mode['btn-bg']}`, fontWeight:`${mode['btn-f-w']}`, border:`${mode['btn-b']}`, borderRadius:`${mode['btn-b-r']}`, color:`${mode['btn-t']}`, textShadow:`${mode['btn-t-s']}`, fontFamily:"Roboto", fontSize:"18px", width:"50%", cursor:"pointer"}} onClick={()=> {handleChangeSize(5, 5)}}>5 x 5</button>
-              <br/><br/>
-              <button style={{background:`${mode['btn-bg']}`, fontWeight:`${mode['btn-f-w']}`, border:`${mode['btn-b']}`, borderRadius:`${mode['btn-b-r']}`, color:`${mode['btn-t']}`, textShadow:`${mode['btn-t-s']}`, fontFamily:"Roboto", fontSize:"18px", width:"50%", cursor:"pointer"}} onClick={()=> {handleChangeSize(5, 6)}}>6 x 6</button>
-              <br/><br/>
-              <button style={{background:`${mode['btn-bg']}`, fontWeight:`${mode['btn-f-w']}`, border:`${mode['btn-b']}`, borderRadius:`${mode['btn-b-r']}`, color:`${mode['btn-t']}`, textShadow:`${mode['btn-t-s']}`, fontFamily:"Roboto", fontSize:"18px", width:"50%", cursor:"pointer"}} onClick={()=> {handleChangeSize(5, 7)}}>7 x 7</button>
-            </div>
+            <SinglePlayer curr={board} sound={playSound} starts={playerStarts} mode={mode} aiMode={aiMode}/>
           </>
         )}
 
         {currentView == 5 && (
           <>
             <div style={{margin:"auto", width:"300px", height:"70%", boxShadow:"1px 1px 10px lightgray", textAlign:"center", background:`${mode['modal']}`}}>
-              <div style={{height:"15%"}}></div>
+              <div style={{height:"5%"}}></div>
               <h1 style={{textShadow:`${mode['mdl-t-s']}`, color:`${mode['mdl-t']}`, fontSize:"40px", marginLeft:"25px"}}>Tic Tac Toe</h1>
-              <br/>
-              <button style={{background:`${mode['btn-bg']}`, fontWeight:`${mode['btn-f-w']}`, border:`${mode['btn-b']}`, borderRadius:`${mode['btn-b-r']}`, color:`${mode['btn-t']}`, textShadow:`${mode['btn-t-s']}`, fontFamily:"Roboto", fontSize:"16px", padding:"5px", width:"55%", cursor:"pointer"}} onClick={()=> {handlePlayerStarts(6, 1)}}>Play 1 Starts <span style={{float:"right", marginRight:"3px", fontSize:"1.3em", rotate:"270deg"}}><DownloadOutlined/></span></button>
+          
+              <button style={{background:`${mode['btn-bg']}`, fontWeight:`${mode['btn-f-w']}`, border:`${mode['btn-b']}`, borderRadius:`${mode['btn-b-r']}`, color:`${mode['btn-t']}`, textShadow:`${mode['btn-t-s']}`, fontFamily:"Roboto", fontSize:"18px", width:"50%", cursor:"pointer"}} onClick={()=> {handleChangeSize(6, 3)}}>3 x 3</button>
               <br/><br/>
-              <button style={{background:`${mode['btn-bg']}`, fontWeight:`${mode['btn-f-w']}`, border:`${mode['btn-b']}`, borderRadius:`${mode['btn-b-r']}`, color:`${mode['btn-t']}`, textShadow:`${mode['btn-t-s']}`, fontFamily:"Roboto", fontSize:"16px", padding:"5px", width:"55%", cursor:"pointer"}} onClick={()=> {handlePlayerStarts(6, 2)}}>Player 2 Starts <span style={{float:"right", marginRight:"3px", fontSize:"1.2em"}}><LoginOutlined/></span></button>
+              <button style={{background:`${mode['btn-bg']}`, fontWeight:`${mode['btn-f-w']}`, border:`${mode['btn-b']}`, borderRadius:`${mode['btn-b-r']}`, color:`${mode['btn-t']}`, textShadow:`${mode['btn-t-s']}`,  fontFamily:"Roboto", fontSize:"18px", width:"50%", cursor:"pointer"}} onClick={()=> {handleChangeSize(6, 4)}}>4 x 4</button>
+              <br/><br/>
+              <button style={{background:`${mode['btn-bg']}`, fontWeight:`${mode['btn-f-w']}`, border:`${mode['btn-b']}`, borderRadius:`${mode['btn-b-r']}`, color:`${mode['btn-t']}`, textShadow:`${mode['btn-t-s']}`, fontFamily:"Roboto", fontSize:"18px", width:"50%", cursor:"pointer"}} onClick={()=> {handleChangeSize(6, 5)}}>5 x 5</button>
+              <br/><br/>
+              <button style={{background:`${mode['btn-bg']}`, fontWeight:`${mode['btn-f-w']}`, border:`${mode['btn-b']}`, borderRadius:`${mode['btn-b-r']}`, color:`${mode['btn-t']}`, textShadow:`${mode['btn-t-s']}`, fontFamily:"Roboto", fontSize:"18px", width:"50%", cursor:"pointer"}} onClick={()=> {handleChangeSize(6, 6)}}>6 x 6</button>
+              <br/><br/>
+              <button style={{background:`${mode['btn-bg']}`, fontWeight:`${mode['btn-f-w']}`, border:`${mode['btn-b']}`, borderRadius:`${mode['btn-b-r']}`, color:`${mode['btn-t']}`, textShadow:`${mode['btn-t-s']}`, fontFamily:"Roboto", fontSize:"18px", width:"50%", cursor:"pointer"}} onClick={()=> {handleChangeSize(6, 7)}}>7 x 7</button>
             </div>
           </>
         )}
 
         {currentView == 6 && (
+          <>
+            <div style={{margin:"auto", width:"300px", height:"70%", boxShadow:"1px 1px 10px lightgray", textAlign:"center", background:`${mode['modal']}`}}>
+              <div style={{height:"15%"}}></div>
+              <h1 style={{textShadow:`${mode['mdl-t-s']}`, color:`${mode['mdl-t']}`, fontSize:"40px", marginLeft:"25px"}}>Tic Tac Toe</h1>
+              <br/>
+              <button style={{background:`${mode['btn-bg']}`, fontWeight:`${mode['btn-f-w']}`, border:`${mode['btn-b']}`, borderRadius:`${mode['btn-b-r']}`, color:`${mode['btn-t']}`, textShadow:`${mode['btn-t-s']}`, fontFamily:"Roboto", fontSize:"16px", padding:"5px", width:"55%", cursor:"pointer"}} onClick={()=> {handlePlayerStarts(7, 1)}}>Play 1 Starts <span style={{float:"right", marginRight:"3px", fontSize:"1.3em", rotate:"270deg"}}><DownloadOutlined/></span></button>
+              <br/><br/>
+              <button style={{background:`${mode['btn-bg']}`, fontWeight:`${mode['btn-f-w']}`, border:`${mode['btn-b']}`, borderRadius:`${mode['btn-b-r']}`, color:`${mode['btn-t']}`, textShadow:`${mode['btn-t-s']}`, fontFamily:"Roboto", fontSize:"16px", padding:"5px", width:"55%", cursor:"pointer"}} onClick={()=> {handlePlayerStarts(7, 2)}}>Player 2 Starts <span style={{float:"right", marginRight:"3px", fontSize:"1.2em"}}><LoginOutlined/></span></button>
+            </div>
+          </>
+        )}
+
+        {currentView == 7 && (
           <>
             <TwoPlayer curr={board} sound={playSound} starts={playerStarts} mode={mode}/>
           </>

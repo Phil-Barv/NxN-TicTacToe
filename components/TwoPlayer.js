@@ -217,7 +217,7 @@ const TwoPlayer = ({curr, sound, starts, mode}) => {
         </div>
     ))
 
-    const handleRematch = () => {
+    const handleRestart = () => {
         router.reload();
     }
 
@@ -274,7 +274,7 @@ const TwoPlayer = ({curr, sound, starts, mode}) => {
                             <div style={{height:"15%"}}></div>
                             <h1 style={{textShadow:`${modeVar['mdl-t-s']}`, color:`${modeVar['mdl-t']}`, fontSize:"40px"}}>{"It's a draw!"}</h1>
                             <br/>
-                            <button style={{background:`${modeVar['btn-bg']}`, fontWeight:`${modeVar['btn-f-w']}`, border:`${modeVar['btn-b']}`, borderRadius:`${modeVar['btn-b-r']}`, color:`${modeVar['btn-t']}`, textShadow:`${modeVar['btn-t-s']}`, fontFamily:"Roboto", fontSize:"16px", padding:"7px", width:"55%", cursor:"pointer"}} onClick={handleRematch}>Rematch</button>
+                            <button style={{background:`${modeVar['btn-bg']}`, fontWeight:`${modeVar['btn-f-w']}`, border:`${modeVar['btn-b']}`, borderRadius:`${modeVar['btn-b-r']}`, color:`${modeVar['btn-t']}`, textShadow:`${modeVar['btn-t-s']}`, fontFamily:"Roboto", fontSize:"16px", padding:"7px", width:"55%", cursor:"pointer"}} onClick={handleRestart}>Restart</button>
                             <br/><br/>
                             <button style={{background:`${modeVar['btn-bg']}`, fontWeight:`${modeVar['btn-f-w']}`, border:`${modeVar['btn-b']}`, borderRadius:`${modeVar['btn-b-r']}`, color:`${modeVar['btn-t']}`, textShadow:`${modeVar['btn-t-s']}`, fontFamily:"Roboto", fontSize:"16px", padding:"7px", width:"55%", cursor:"pointer"}} onClick={handleQuitGame}>Quit</button>
                         </div>
@@ -300,7 +300,7 @@ const TwoPlayer = ({curr, sound, starts, mode}) => {
                             <div style={{height:"15%"}}></div>
                             <h1 style={{textShadow:`${mode['mdl-t-s']}`, color:`${mode['mdl-t']}`, fontSize:"40px"}}>Player {handleGetWinner()} Wins!</h1>
                             <br/>
-                            <button style={{background:`${modeVar['btn-bg']}`, fontWeight:`${modeVar['btn-f-w']}`, border:`${modeVar['btn-b']}`, borderRadius:`${modeVar['btn-b-r']}`, color:`${modeVar['btn-t']}`, textShadow:`${modeVar['btn-t-s']}`, fontFamily:"Roboto", fontSize:"16px", padding:"7px", width:"55%", cursor:"pointer"}} onClick={handleRematch}>Rematch</button>
+                            <button style={{background:`${modeVar['btn-bg']}`, fontWeight:`${modeVar['btn-f-w']}`, border:`${modeVar['btn-b']}`, borderRadius:`${modeVar['btn-b-r']}`, color:`${modeVar['btn-t']}`, textShadow:`${modeVar['btn-t-s']}`, fontFamily:"Roboto", fontSize:"16px", padding:"7px", width:"55%", cursor:"pointer"}} onClick={handleRestart}>Restart</button>
                             <br/><br/>
                             <button style={{background:`${modeVar['btn-bg']}`, fontWeight:`${modeVar['btn-f-w']}`, border:`${modeVar['btn-b']}`, borderRadius:`${modeVar['btn-b-r']}`, color:`${modeVar['btn-t']}`, textShadow:`${modeVar['btn-t-s']}`, fontFamily:"Roboto", fontSize:"16px", padding:"7px", width:"55%", cursor:"pointer"}} onClick={handleQuitGame}>Quit</button>
                         </div>
