@@ -31,6 +31,7 @@ const SinglePlayer = ({curr, sound, starts, mode, aiMode}) => {
     const [currentPlayerValue, setCurrentPlayerValue] = useState("");
     const [winner, setWinner] = useState("");
     const [grid, setGrid] = useState("");
+    const [screen, setScreen] = useState(0);
 
     const router = useRouter()
 
@@ -64,13 +65,13 @@ const SinglePlayer = ({curr, sound, starts, mode, aiMode}) => {
     }, [board])
 
     useEffect(()=> {
-        var tempGrid = "1fr";
+        // var tempGrid = `repeat(${arrLen || 1}, 1fr)`;
 
-        for (let i = 1; i < arrLen; i++){
-            tempGrid += " 1fr"
-        }
+        // for (let i = 1; i < arrLen; i++){
+        //     tempGrid += " 1fr"
+        // }
 
-        setGrid(tempGrid)
+        setGrid(`repeat(${arrLen || 1}, 1fr)`)
 
     }, [arrLen])
 
@@ -195,9 +196,15 @@ const SinglePlayer = ({curr, sound, starts, mode, aiMode}) => {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
+    useEffect(() => {
+        setScreen(parseInt((document.getElementById("main_container")?.offsetHeight))/2);
+    }, [board])
+
     const renderBoard = board && Object.entries(board).map(([key, value]) => (
         <div ref={cellRef} key={key} className={styles.cell}
             style={{
+                width: `${parseInt((screen/ arrLen))}px`,
+                height: `${parseInt((screen/ arrLen))}px`,
                 textShadow: `1px 2px ${value == "X"  ? ("gray") : (value == "O" ? ("gray") : ("gray"))}`,
                 color:`${value == "X"  ? ("black") : (value == "O" ? ("white") : ("black"))}`,
                 backgroundColor:`${value == "X"  ? ("#F0FFF0") : (value == "O" ? ("#282C35") : ("lightgray"))}`,
@@ -226,7 +233,7 @@ const SinglePlayer = ({curr, sound, starts, mode, aiMode}) => {
 
     return(
         <>
-        {/* {currentPlayer} */}
+        {/* <h1>{JSON.parse(screen, null, 4)}</h1> */}
             {winner == false && (
                 <>
                     <div style={{ height:"5%", display:"flex", justifyContent:"center"}}>

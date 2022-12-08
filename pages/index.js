@@ -158,7 +158,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className={styles.main_container} style={{background:`${mode['window']}`}}>
+      <div id="main_container" className={styles.main_container} style={{background:`${mode['window']}`}}>
         <div style={{height:"20%", width:"100%"}}>
           <audio id="mellow" autoPlay={true} loops="true">
               <source src={mellow} type="audio/mpeg"></source>
