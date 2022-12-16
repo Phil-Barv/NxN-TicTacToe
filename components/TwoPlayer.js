@@ -315,7 +315,7 @@ const TwoPlayer = ({curr, sound, starts, mode}) => {
                     </>
                 )
         }
-        {JSON.stringify(board, null, 4)}
+        {/* {JSON.stringify(board, null, 4)} */}
     </>
     )
 } 
